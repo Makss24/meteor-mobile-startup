@@ -21,4 +21,29 @@ Template.login.onRendered(() => {
 		$(this).addClass('active');
 		e.preventDefault();
 	});
+
+    $('form button').on('click', (event) => {
+        event.preventDefault();
+        if (event.currentTarget.id === "register-submit") {
+            const registerData = {
+                username: $('#register-username').val(),
+                email: $('#register-email').val(),
+                password: $('#register-password').val(),
+                confirmPassword: $('#confirm-password').val(),
+            };
+            console.log(registerData);
+
+            Meteor.call('user.create', registerData, (err, res) => {
+                if (err)
+                    console.log(err);
+                else
+                    console.log(res);
+                    $('#login-form-link').click();
+                    // TODO : autocomplete field of login
+            });
+
+        } else {
+            console.log('log in form');
+        }
+    });
 });

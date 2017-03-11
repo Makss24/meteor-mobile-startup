@@ -24,3 +24,5 @@ accounts-ui
 accounts-password
 chriswessels:slideout
 twbs:bootstrap
+check
+aldeed:simple-schema

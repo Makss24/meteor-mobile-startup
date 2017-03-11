@@ -10,6 +10,9 @@
     https://atmospherejs.com/twbs/bootstrap
 - chriswessels:slideout
     https://github.com/chriswessels/meteor-slideout
+- check
+- aldeed:simple-schema
+    https://github.com/aldeed/meteor-simple-schema
 
 
 ### TODO
