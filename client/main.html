@@ -12,40 +12,27 @@
 
 <template name="main">
 
-<div class="slideout-menu">
+    <div class="slideout-menu">
+        {{ #if isConnected }}
+            <div class="item">
+                <a href="{{ pathFor 'home' }}">Accueil</a>
+            </div>
+            <div class="item">
+                <a class="js-logout" href="{{ pathFor 'login' }}">Déconnexion</a>
+            </div>
+        {{ /if }} <!--isConnected-->
+    </div>
+
     {{ #if isConnected }}
-      <div class="item">
-        <a class="js-disable-canReturn" href="{{ pathFor 'homepage' }}"><i class="fa fa-bank" aria-hidden="true"></i>Accueil</a>
-      </div>
-      <div class="item">
-        <a class="js-disable-canReturn" href="{{ pathFor 'partnerScan' }}"><i class="fa fa-qrcode" aria-hidden="true"></i>Scanner</a>
-      </div>
-      <div class="item">
-        <a class="js-disable-canReturn js-logout" href="{{ pathFor 'login' }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Déconnexion</a>
-      </div>
+        <div class="top-bar">
+            <a class="js-menu-toggle">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </a>
+        </div>
     {{ /if }} <!--isConnected-->
-  </div>
 
-  <div class="top-bar">
-    {{ #if canReturn }}
-      <a class="js-return">
-        <i class="fa fa-arrow-left" aria-hidden="true"></i>
-      </a>
-    {{ else }}
-      {{ #if isConnected }}
-        <a class="js-menu-toggle">
-          <i class="fa fa-bars" aria-hidden="true"></i>
-        </a>
-      {{ /if }} <!--isConnected-->
-    {{ /if }}
-  </div>
-
-  {{ #if isConnected }}
-    {{ > header }}
-  {{ /if }}
-
-  <div class="app-content">
-    {{ > Template.dynamic template=content }}
-  </div>
+    <div class="app-content {{ #unless isConnected }}not-connected{{ /unless }}">
+        {{ > Template.dynamic template=content }}
+    </div>
 
 </template>

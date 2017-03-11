@@ -14,14 +14,18 @@ FlowRouter.route('/', {
 });
 
 FlowRouter.route('/home', {
-  name: 'homepage',
+  name: 'home',
   action() {
-    BlazeLayout.render('main', { content: 'homepage' });
+    if (!Meteor.user()) {
+      FlowRouter.go('login')
+    } else {
+      BlazeLayout.render('main', { content: 'homepage' });
+    }
   },
 });
 
 FlowRouter.notFound = {
   action() {
-    FlowRouter.go('index');
+    FlowRouter.go('home');
   },
 };

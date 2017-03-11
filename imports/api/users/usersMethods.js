@@ -6,14 +6,15 @@ import { check } from 'meteor/check';
 Meteor.methods({
 
     'user.create'(data) {
-
-        const { username, email, password } = data;
+        check(data, Object);
+        const { email, password } = data;
+        check(email, String);
+        check(password, String);
 
         new SimpleSchema({
-            username: { type: String },
             email: { type: String },
             password: { type: String },
-        }).validate({ username, email, password });
+        }).validate({ email, password });
 
         try {
             if (Accounts.findUserByEmail(email)) {
@@ -21,13 +22,8 @@ Meteor.methods({
                     statusCode: 409,
                     message: 'Email already exist',
                 });
-            } else if (Accounts.findUserByUsername(username)) {
-                return new Meteor.Error({
-                    statusCode: 409,
-                    message: 'Username already exist',
-                });
             }
-            const userId = Accounts.createUser({ username, email, password });
+            const userId = Accounts.createUser({ email, password });
             return res = {
                 userId,
                 statusCode: 200,

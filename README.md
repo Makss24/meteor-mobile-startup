@@ -13,13 +13,16 @@
 - check
 - aldeed:simple-schema
     https://github.com/aldeed/meteor-simple-schema
+- arillo:flow-router-helpers
+    https://github.com/arillo/meteor-flow-router-helpers
 
 
 ### TODO
 - [X] Create basic older organization
 - [X] Remove insecure and autopublish
-- [ ] explain organization from readMe.md
+- [ ] explain organization in readMe.md
 - [ ] explain each folder
+- [ ] add CSS preprocessor
 - [ ] create basic model, method, publication
 - [ ] create version with JsInspect
 - [ ] create version with ShrinkWrap

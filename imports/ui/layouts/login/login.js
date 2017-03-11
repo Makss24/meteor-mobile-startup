@@ -2,7 +2,6 @@ import { Template } from 'meteor/templating';
 import { $ } from 'meteor/jquery';
 
 import './login.html';
-import './login.css';
 
 
 Template.login.onRendered(() => {
@@ -22,28 +21,44 @@ Template.login.onRendered(() => {
 		e.preventDefault();
 	});
 
+
+// TODO : Add validation rules and error messages
     $('form button').on('click', (event) => {
         event.preventDefault();
         if (event.currentTarget.id === "register-submit") {
             const registerData = {
-                username: $('#register-username').val(),
                 email: $('#register-email').val(),
                 password: $('#register-password').val(),
                 confirmPassword: $('#confirm-password').val(),
             };
-            console.log(registerData);
 
-            Meteor.call('user.create', registerData, (err, res) => {
-                if (err)
-                    console.log(err);
-                else
-                    console.log(res);
-                    $('#login-form-link').click();
-                    // TODO : autocomplete field of login
-            });
+            if (registerData.password === registerData.confirmPassword) {
+                Meteor.call('user.create', registerData, (err, res) => {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log(res);
+                        $('#login-form-link').click();
+                        // TODO : autocomplete field of login
+                    }
+                });
+            } else {
+                alert('password fields doesn\'t match');
+            }
 
         } else {
-            console.log('log in form');
+            const loginData = {
+                email: $('#email').val(),
+                password: $('#password').val(),
+            };
+
+            Meteor.loginWithPassword(loginData.email, loginData.password, (err) => {
+                if (err) {
+                    console.log(err);
+                } else {
+                    FlowRouter.go('home');
+                }
+            });
         }
     });
 });
