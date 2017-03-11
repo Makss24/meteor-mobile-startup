@@ -4,10 +4,28 @@ import { FlowRouter } from 'meteor/kadira:flow-router';
 import { BlazeLayout } from 'meteor/kadira:blaze-layout';
 
 import '../../../ui/layouts/homepage/homepage';
+import '../../../ui/layouts/login/login';
 
 FlowRouter.route('/', {
-  name: 'indexPage',
+  name: 'login',
   action() {
-    BlazeLayout.render('main', { content: 'homepage' });
+    BlazeLayout.render('main', { content: 'login' });
   },
 });
+
+FlowRouter.route('/home', {
+  name: 'home',
+  action() {
+    if (!Meteor.user()) {
+      FlowRouter.go('login')
+    } else {
+      BlazeLayout.render('main', { content: 'homepage' });
+    }
+  },
+});
+
+FlowRouter.notFound = {
+  action() {
+    FlowRouter.go('home');
+  },
+};

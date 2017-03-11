@@ -1,13 +1,38 @@
 <head>
   <title>meteor-startup</title>
+
+  <!-- Meta of chriswessels:slideout meteor package -->
+  <meta http-equiv="cleartype" content="on">
+  <meta name="MobileOptimized" content="320">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
 </head>
 
 <template name="main">
 
-  {{ > header }}
+    <div class="slideout-menu">
+        {{ #if isConnected }}
+            <div class="item">
+                <a href="{{ pathFor 'home' }}">Accueil</a>
+            </div>
+            <div class="item">
+                <a class="js-logout" href="{{ pathFor 'login' }}">Déconnexion</a>
+            </div>
+        {{ /if }} <!--isConnected-->
+    </div>
 
-  {{ > Template.dynamic template=content }}
+    {{ #if isConnected }}
+        <div class="top-bar">
+            <a class="js-menu-toggle">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </a>
+        </div>
+    {{ /if }} <!--isConnected-->
 
-  {{ > footer }}
+    <div class="app-content {{ #unless isConnected }}not-connected{{ /unless }}">
+        {{ > Template.dynamic template=content }}
+    </div>
 
 </template>
