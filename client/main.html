@@ -1,13 +1,51 @@
 <head>
   <title>meteor-startup</title>
+
+  <!-- Meta of chriswessels:slideout meteor package -->
+  <meta http-equiv="cleartype" content="on">
+  <meta name="MobileOptimized" content="320">
+  <meta name="HandheldFriendly" content="True">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+
 </head>
 
 <template name="main">
 
-  {{ > header }}
+<div class="slideout-menu">
+    {{ #if isConnected }}
+      <div class="item">
+        <a class="js-disable-canReturn" href="{{ pathFor 'homepage' }}"><i class="fa fa-bank" aria-hidden="true"></i>Accueil</a>
+      </div>
+      <div class="item">
+        <a class="js-disable-canReturn" href="{{ pathFor 'partnerScan' }}"><i class="fa fa-qrcode" aria-hidden="true"></i>Scanner</a>
+      </div>
+      <div class="item">
+        <a class="js-disable-canReturn js-logout" href="{{ pathFor 'login' }}"><i class="fa fa-sign-out" aria-hidden="true"></i>Déconnexion</a>
+      </div>
+    {{ /if }} <!--isConnected-->
+  </div>
 
-  {{ > Template.dynamic template=content }}
+  <div class="top-bar">
+    {{ #if canReturn }}
+      <a class="js-return">
+        <i class="fa fa-arrow-left" aria-hidden="true"></i>
+      </a>
+    {{ else }}
+      {{ #if isConnected }}
+        <a class="js-menu-toggle">
+          <i class="fa fa-bars" aria-hidden="true"></i>
+        </a>
+      {{ /if }} <!--isConnected-->
+    {{ /if }}
+  </div>
 
-  {{ > footer }}
+  {{ #if isConnected }}
+    {{ > header }}
+  {{ /if }}
+
+  <div class="app-content">
+    {{ > Template.dynamic template=content }}
+  </div>
 
 </template>
