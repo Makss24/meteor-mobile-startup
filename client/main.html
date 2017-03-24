@@ -12,27 +12,27 @@
 
 <template name="main">
 
-    <div class="slideout-menu">
-        {{ #if isConnected }}
-            <div class="item">
-                <a href="{{ pathFor 'home' }}">Accueil</a>
-            </div>
-            <div class="item">
-                <a class="js-logout" href="{{ pathFor 'login' }}">Déconnexion</a>
-            </div>
-        {{ /if }} <!--isConnected-->
-    </div>
-
+  <div class="slideout-menu">
     {{ #if isConnected }}
-        <div class="top-bar">
-            <a class="js-menu-toggle">
-                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-            </a>
-        </div>
+      <div class="item">
+        <a href="{{ pathFor 'home' }}">Accueil</a>
+      </div>
+      <div class="item">
+        <a class="js-logout" href="{{ pathFor 'login' }}">Déconnexion</a>
+      </div>
     {{ /if }} <!--isConnected-->
+  </div>
 
-    <div class="app-content {{ #unless isConnected }}not-connected{{ /unless }}">
-        {{ > Template.dynamic template=content }}
+  {{ #if isConnected }}
+    <div class="top-bar">
+      <a class="js-menu-toggle">
+        <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+      </a>
     </div>
+  {{ /if }} <!--isConnected-->
+
+  <div class="app-content {{ #unless isConnected }}not-connected{{ /unless }}">
+    {{ > Template.dynamic template=content }}
+  </div>
 
 </template>

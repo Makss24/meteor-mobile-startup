@@ -17,7 +17,7 @@ FlowRouter.route('/home', {
   name: 'home',
   action() {
     if (!Meteor.user()) {
-      FlowRouter.go('login')
+      FlowRouter.go('login');
     } else {
       BlazeLayout.render('main', { content: 'homepage' });
     }

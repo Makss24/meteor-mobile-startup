@@ -2,10 +2,50 @@
   "name": "meteor-startup",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "meteor run",
+    "lint": "eslint ."
   },
   "dependencies": {
     "meteor-node-stubs": "~0.2.0",
     "babel-runtime": "6.18.0"
+  },
+  "devDependencies": {
+    "eslint": "^2.3.0",
+    "eslint-config-airbnb": "^6.1.0",
+    "eslint-plugin-meteor": "^3.0.1",
+    "eslint-plugin-react": "^4.0.0"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "ecmaVersion": 6,
+      "sourceType": "module"
+    },
+    "plugins": [
+      "meteor"
+    ],
+    "extends": [
+      "airbnb/base",
+      "plugin:meteor/recommended"
+    ],
+    "globals": {},
+    "rules": {
+      "meteor/eventmap-params": [
+        2,
+        {
+          "eventParamName": "event",
+          "templateInstanceParamName": "instance"
+        }
+      ],
+      "meteor/template-names": [
+        0
+      ],
+      "max-len": [
+        "error",
+        150
+      ],
+      "meteor/no-session": 0,
+      "no-alert": 1,
+      "no-console": 1
+    }
   }
 }
